@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mis 15 Años | Mariana Cabalceta Ruiz</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --navy-1:#010713;
+      --navy-2:#04142e;
+      --navy-3:#08265a;
+      --gold:#d8ad59;
+      --gold-soft:#f3d996;
+      --cream:#fff8e8;
+      --line:rgba(216,173,89,.45);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:"Cormorant Garamond",serif;
+      color:var(--cream);
+      background:
+        linear-gradient(180deg,#010713 0%,#031127 25%,#061b40 65%,#020814 100%);
+      overflow-x:hidden;
+      min-height:100vh;
+    }
+
+    a{color:inherit}
+    section[id]{scroll-margin-top:80px}
+
+    /* ====== FONDO VIVO ====== */
+    .sky{
+      position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:-20;
+      background:
+        radial-gradient(circle at 18% 18%,rgba(31,91,166,.18),transparent 30%),
+        radial-gradient(circle at 80% 35%,rgba(40,105,190,.14),transparent 28%),
+        linear-gradient(180deg,rgba(1,7,19,.2),rgba(1,7,19,.45));
+    }
+    .tiny-star{
+      position:absolute;border-radius:50%;background:#ffe7a5;
+      box-shadow:0 0 7px #ffe7a5,0 0 18px rgba(255,231,165,.5);
+      animation:twinkle var(--t) ease-in-out infinite alternate, drift var(--d) ease-in-out infinite alternate;
+    }
+    @keyframes twinkle{from{opacity:.2;transform:scale(.65)}to{opacity:1;transform:scale(1.7)}}
+    @keyframes drift{from{translate:0 0}to{translate:8px -12px}}
+    .big-star{
+      position:absolute;color:#ffe7a5;
+      text-shadow:0 0 12px #ffe7a5,0 0 30px rgba(255,231,165,.8),0 0 60px rgba(255,231,165,.35);
+      animation:bigGlow 3s ease-in-out infinite alternate;
+    }
+    @keyframes bigGlow{from{opacity:.4;transform:scale(.75)}to{opacity:1;transform:scale(1.25)}}
+
+    .shoot{
+      position:fixed;right:-180px;width:160px;height:2px;opacity:0;z-index:-5;
+      background:linear-gradient(to left,transparent,rgba(255,233,176,.8),#fff9df);
+      filter:drop-shadow(0 0 6px #ffe7a8);
+      border-radius:999px;
+      animation:shooting 8.5s linear infinite;
+      pointer-events:none;
+    }
+    .shoot::after{
+      content:"";position:absolute;right:-3px;top:50%;transform:translateY(-50%);
+      width:8px;height:8px;border-radius:50%;background:#fff9df;
+      box-shadow:0 0 12px #ffe7a8,0 0 30px rgba(255,228,160,.8);
+    }
+    @keyframes shooting{
+      0%{opacity:0;transform:translate3d(0,0,0) rotate(-28deg)}
+      8%,32%{opacity:1}
+      55%{opacity:0;transform:translate3d(-760px,400px,0) rotate(-28deg)}
+      100%{opacity:0}
+    }
+
+    /* Remolinos estilo Noche Estrellada */
+    .swirl{
+      position:absolute;fill:none;stroke-linecap:round;stroke-linejoin:round;
+      animation:floatSwirl 15s ease-in-out infinite alternate;
+      filter:drop-shadow(0 0 10px rgba(99,157,236,.15));
+    }
+    .swirl.s1{width:720px;right:-150px;top:8%;opacity:.48}
+    .swirl.s2{width:800px;left:-180px;top:34%;opacity:.34;animation-delay:-5s}
+    .swirl.s3{width:760px;right:-160px;top:61%;opacity:.32;animation-delay:-8s}
+    @keyframes floatSwirl{
+      from{transform:translate(-10px,-6px) scale(1)}
+      to{transform:translate(16px,12px) scale(1.04)}
+    }
+
+    /* ====== SOBRE DE ENTRADA ====== */
+    #intro{
+      position:fixed;inset:0;z-index:9999;
+      display:flex;justify-content:center;align-items:center;text-align:center;
+      padding:28px;background:#020814;
+      transition:opacity .75s ease;
+      overflow:hidden;
+    }
+    #intro.leaving{opacity:0;pointer-events:none}
+    #intro .intro-bg{
+      position:absolute;inset:0;
+      background:
+        linear-gradient(rgba(1,7,19,.62),rgba(1,7,19,.82)),
+        url("fondo-vangogh.png") center/cover no-repeat;
+      opacity:.9;
+    }
+    .intro-card{position:relative;z-index:2;width:min(560px,94%);display:flex;flex-direction:column;align-items:center}
+    .intro-label{color:var(--gold-soft);text-transform:uppercase;letter-spacing:5px;font-size:.9rem;margin-bottom:28px}
+
+    .envelope-wrap{width:258px;height:174px;position:relative;margin-bottom:74px;perspective:1000px;filter:drop-shadow(0 18px 24px rgba(0,0,0,.32))}
+    .env-back{position:absolute;inset:0;background:linear-gradient(160deg,#c9963d 0%,#e8c26f 55%,#d6a24d 100%);border-radius:9px;box-shadow:inset 0 1px 0 rgba(255,244,215,.30), inset 0 -8px 16px rgba(165,110,24,.12), 0 18px 45px rgba(0,0,0,.38)}
+    .env-letter{
+      position:absolute;left:29px;top:68px;width:200px;height:78px;z-index:2;border-radius:5px;
+      background:#fff8e8;color:#17305b;display:flex;flex-direction:column;justify-content:center;align-items:center;
+      transition:transform .95s ease, opacity .3s ease;box-shadow:0 8px 18px rgba(0,0,0,.15);
+      opacity:0;
+    }
+    .env-letter .n{font-family:"Great Vibes",cursive;font-size:1.7rem;color:#a77c31;line-height:1}
+    .env-letter .s{margin-top:6px;text-transform:uppercase;letter-spacing:3px;font-size:.68rem}
+    .env-flap{
+      position:absolute;z-index:8;top:0;left:0;width:0;height:0;
+      border-left:129px solid transparent;border-right:129px solid transparent;border-top:96px solid #f0d28c;
+      transform-origin:top center;transition:transform .8s ease,z-index 0s linear .38s;filter:drop-shadow(0 2px 2px rgba(0,0,0,.08));
+    }
+    .env-left{display:none}
+    .env-right{display:none}
+    /* Sin solapa inferior: elimina las dos diagonales duplicadas. */
+    .env-bottom{display:none}
+    .env-seal{
+      position:absolute;left:50%;top:72px;transform:translateX(-50%);z-index:10;
+      width:52px;height:52px;border-radius:50%;display:flex;justify-content:center;align-items:center;
+      background:radial-gradient(circle at 32% 24%,#174781,#071e48 75%);border:2px solid #f8de9e;color:#f8de9e;box-shadow:0 3px 10px rgba(1,8,25,.3),inset 0 0 0 3px rgba(255,223,145,.12);
+      font-family:"Great Vibes",cursive;font-size:1.8rem;transition:opacity .3s ease;
+    }
+     .envelope-wrap::after{content:none}
+    .envelope-wrap.open .env-flap{transform:rotateX(180deg);z-index:0}
+    .envelope-wrap.open .env-seal{opacity:0}
+    .envelope-wrap.open .env-letter{transform:translateY(-92px);opacity:1}
+    .envelope-wrap.open .env-flap{transform:rotateX(180deg);z-index:1;transition:transform .8s ease,z-index 0s linear .8s}
+    .envelope-wrap.open .env-letter{z-index:9;transition-delay:.4s}
+    .envelope-wrap.open .env-seal{opacity:0;pointer-events:none}
+        #openInvitation:focus-visible,.btn:focus-visible,.music-button:focus-visible{outline:3px solid var(--gold-soft);outline-offset:4px}
+    .rsvp-note{font-size:1.12rem;color:var(--gold-soft);margin:18px auto 0;max-width:540px}
+    .rsvp-link[aria-disabled="true"]{opacity:.65;cursor:not-allowed}
+    .dress-text strong{color:var(--gold-soft)}
+
+    .intro-title{font-family:"Great Vibes",cursive;color:var(--gold);font-size:clamp(2.7rem,6vw,4rem);line-height:1.08;margin-bottom:12px}
+    .intro-text{font-size:1.1rem;margin-bottom:26px}
+    .btn{
+      display:inline-block;border:1px solid var(--gold);border-radius:999px;padding:15px 32px;
+      color:var(--gold-soft);text-decoration:none;text-transform:uppercase;letter-spacing:3px;
+      background:rgba(216,173,89,.04);transition:.25s;cursor:pointer;font-family:inherit;
+    }
+    .btn:hover{background:var(--gold);color:#06152f;box-shadow:0 0 28px rgba(216,173,89,.35)}
+
+    /* ====== NAV ====== */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:300;
+      display:flex;justify-content:center;gap:28px;padding:17px 18px;
+      background:rgba(1,7,19,.76);backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(216,173,89,.2);
+    }
+    nav a{text-decoration:none;text-transform:uppercase;letter-spacing:2px;font-size:.8rem;color:var(--gold-soft)}
+
+    /* ====== LUNA - fases por SVG ====== */
+    .moon-holder{
+      position:absolute;left:3.8%;top:54px;width:88px;height:88px;z-index:0;
+      filter:drop-shadow(0 0 16px rgba(255,221,128,.65));
+      opacity:.96;
+    }
+    .moon-holder svg{width:100%;height:100%;overflow:visible}
+    .moon-glow-ring{
+      animation:moonPulse 4s ease-in-out infinite alternate;
+      transform-origin:center;
+    }
+    @keyframes moonPulse{from{opacity:.45;transform:scale(.95)}to{opacity:.9;transform:scale(1.08)}}
+
+    /* ====== GENERAL ====== */
+    section{width:min(1080px,90%);margin:auto;position:relative}
+    .section-title{text-align:center;color:var(--gold-soft);text-transform:uppercase;letter-spacing:6px;font-weight:500;font-size:clamp(1.4rem,3vw,2rem);margin-bottom:34px}
+    .panel{
+      background:rgba(2,10,28,.58);backdrop-filter:blur(4px);
+      border:1px solid rgba(216,173,89,.13);border-radius:28px;
+      box-shadow:0 18px 50px rgba(0,0,0,.18);
+      padding:48px 40px;
+    }
+
+    /* ====== HERO ====== */
+    .hero{
+      min-height:110vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      text-align:center;padding:165px 20px 90px;isolation:isolate;
+    }
+    .hero > *{position:relative;z-index:3}
+    .hero > .moon-holder{position:absolute;left:4%;right:auto;top:68px;z-index:1;pointer-events:none}
+    .hero-small{color:var(--gold-soft);letter-spacing:2px;font-size:clamp(1.15rem,2.4vw,1.45rem);margin-bottom:58px}
+    .hero-name{font-family:"Great Vibes",cursive;color:var(--gold);font-size:clamp(4rem,9vw,7rem);font-weight:400;line-height:1.05;margin-bottom:48px;text-shadow:0 3px 20px rgba(0,0,0,.55)}
+    .fifteen{color:var(--gold-soft);font-size:clamp(3rem,7vw,5.4rem)}
+    .fifteen strong{color:var(--gold);font-size:1.5em;font-weight:600}
+    .theme{margin-top:36px;color:var(--gold-soft);text-transform:uppercase;letter-spacing:8px;font-size:clamp(1.2rem,3vw,2rem)}
+    .tagline{margin-top:18px;color:var(--gold);font-family:"Great Vibes",cursive;font-size:clamp(2rem,5vw,2.8rem)}
+    .hero-intro{max-width:980px;margin:0 auto 40px;text-align:center;}
+    .hero-invite{max-width:960px;margin:0 auto 16px;font-size:clamp(1.35rem,2.4vw,1.72rem);line-height:1.7;color:var(--cream)}
+    .hero-invite em{color:var(--gold-soft);font-style:normal}
+    .hero-invite-sub{max-width:930px;margin:0 auto 24px;font-size:clamp(1.15rem,2.1vw,1.4rem);line-height:1.75;color:var(--gold-soft)}
+    .kitty-icon{width:98px;height:84px;background:transparent;display:flex;align-items:center;justify-content:center;margin:auto}
+    .kitty-png{display:block;width:84px;height:auto;margin:auto;filter:drop-shadow(0 0 7px rgba(216,173,89,.22)) saturate(0.9) brightness(0.98)}
+    .gift-icon{width:74px;height:74px;border-radius:50%;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;background:rgba(216,173,89,.12);border:1px solid rgba(216,173,89,.28);font-size:2rem;box-shadow:0 0 18px rgba(216,173,89,.12)}
+    .map-button-wrap{display:flex;justify-content:center;margin-top:34px}
+    .rsvp-deadline{font-size:1.15rem;color:var(--cream);margin:20px auto 0;max-width:680px;line-height:1.7}
+    .rsvp-deadline strong{color:var(--gold-soft)}
+    .rsvp-highlight{margin:22px auto 10px;max-width:760px;padding:18px 22px;border:1.5px solid rgba(216,173,89,.45);border-radius:18px;background:rgba(216,173,89,.12);box-shadow:0 0 24px rgba(216,173,89,.11)}
+    .rsvp-highlight .rsvp-deadline{font-size:1.22rem;color:var(--cream);margin:0;max-width:none;line-height:1.78;font-weight:500}
+    .rsvp-highlight .rsvp-deadline strong{display:inline-block;font-size:1.46rem;line-height:1.2;color:#fff1bf;font-weight:800;padding:0 3px;text-shadow:0 0 14px rgba(255,235,170,.28)}
+
+
+
+    /* ====== SEPARADOR KITTY ====== */
+    .kitty-divider{
+      width:min(840px,94%);margin:56px auto;
+      display:grid;grid-template-columns:1fr 100px 1fr;gap:16px;align-items:center;
+    }
+    .kitty-line{
+      height:1px;position:relative;
+      background:linear-gradient(to right,transparent,rgba(216,173,89,.45),var(--gold),rgba(216,173,89,.45),transparent);
+    }
+    .kitty-line::after{content:"✦";position:absolute;top:50%;transform:translateY(-50%);color:var(--gold-soft);text-shadow:0 0 8px rgba(255,226,145,.8)}
+    .kitty-line.left::after{right:14%}.kitty-line.right::after{left:14%}
+    
+    /* ====== MENSAJE / FECHA / ETC ====== */
+    .message,.date-section,.location,.dress,.gift,.rsvp{padding:78px 0;text-align:center}
+    .message p,.gift p{max-width:720px;margin:auto;font-size:clamp(1.2rem,2.5vw,1.65rem);line-height:1.85}
+    .message em{color:var(--gold-soft)}
+
+    .date-main{font-family:"Great Vibes",cursive;color:var(--gold);font-size:clamp(3rem,6vw,4.6rem);line-height:1.22}
+    .time{margin-top:18px;color:var(--gold-soft);font-size:clamp(2.5rem,5vw,3.5rem);font-weight:600}
+    .countdown{
+      max-width:820px;margin:48px auto 0;display:grid;grid-template-columns:repeat(4,1fr);
+      padding:26px 14px;border:1px solid rgba(216,173,89,.5);border-radius:24px;background:rgba(2,10,28,.7)
+    }
+    .count-item{border-right:1px solid rgba(216,173,89,.22)}
+    .count-item:last-child{border-right:none}
+    .count-number{display:block;color:var(--gold);font-size:clamp(2.3rem,5vw,4rem);font-weight:600}
+    .count-label{display:block;margin-top:7px;text-transform:uppercase;letter-spacing:1px}
+
+    .location-name,.dress-main{font-family:"Great Vibes",cursive;color:var(--gold);font-size:clamp(3rem,6vw,4.4rem)}
+    .location-address,.dress-text{max-width:720px;margin:20px auto 0;font-size:clamp(1.15rem,2.5vw,1.4rem);line-height:1.8}
+    .location-address strong{color:var(--gold-soft)}
+
+    .photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;width:min(680px,100%);margin:36px auto 0}
+    .photo{aspect-ratio:4/3;height:auto;border-radius:16px;overflow:hidden;border:1px solid rgba(216,173,89,.32);background:#071326;position:relative}
+    .photo img{width:100%;height:100%;object-fit:contain;display:block}
+        .photo .ph{display:none;position:absolute;inset:0;align-items:center;justify-content:center;color:rgba(255,248,232,.5);font-size:1rem;letter-spacing:1px}
+
+    .colors{display:grid;gap:20px;max-width:650px;margin:38px auto 0}
+    .color-item{display:flex;justify-content:center;align-items:center;gap:14px;font-size:1.12rem}
+    .dot{width:24px;height:24px;border-radius:50%;border:1px solid rgba(255,255,255,.45);flex-shrink:0}
+    .dot.navy{background:#071d57}.dot.silver{background:linear-gradient(135deg,#8d929b,#f1f3f6,#8d929b)}
+
+    .rsvp-title{font-family:"Great Vibes",cursive;color:var(--gold);font-size:clamp(2.8rem,5vw,4rem);margin-bottom:10px}
+
+    /* ====== FINAL VAN GOGH ====== */
+    .earth-transition{
+      width:100%;max-width:none;min-height:86vh;
+      background:
+        linear-gradient(to bottom,rgba(2,8,20,.08),rgba(2,8,20,.18) 35%,rgba(2,8,20,.50) 100%),
+        url("fondo-vangogh.png") center bottom/cover no-repeat;
+      display:flex;align-items:flex-end;justify-content:center;padding:60px 20px 35px;
+      border-top:1px solid rgba(216,173,89,.15);
+    }
+    .earth-transition p{
+      color:var(--gold-soft);letter-spacing:2px;text-align:center;text-shadow:0 2px 12px rgba(0,0,0,.9);
+      font-size:1rem;
+    }
+
+    /* ====== MUSICA ====== */
+    .music-button{
+      position:fixed;right:22px;bottom:22px;z-index:500;width:58px;height:58px;border-radius:50%;
+      border:1px solid var(--gold);background:rgba(2,10,28,.92);color:var(--gold-soft);font-size:1.35rem;cursor:pointer;
+      box-shadow:0 0 18px rgba(216,173,89,.2)
+    }
+
+    @media(max-width:760px){
+      nav{justify-content:flex-start;overflow-x:auto;gap:18px}
+      nav a{font-size:.7rem;white-space:nowrap}
+      .hero{min-height:100vh;padding-top:160px}
+      .hero > .moon-holder{left:4%;top:72px;width:68px;height:68px}
+      .theme{letter-spacing:5px}
+      .kitty-divider{grid-template-columns:1fr 75px 1fr;gap:8px}
+      .kitty-icon{width:72px;height:64px}.kitty-png{width:66px}
+      .countdown{padding:20px 6px}
+      .count-label{font-size:.66rem}
+      .photos{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+      .photo{aspect-ratio:4/3;height:auto;border-radius:12px}
+      .panel{padding:38px 22px}
+      .envelope-wrap{transform:scale(.92);margin-bottom:62px}
+      .earth-transition{min-height:68vh}
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Fondo -->
+  <div class="sky" id="sky">
+    <svg class="swirl s1" viewBox="0 0 760 300">
+      <path d="M25 190 C150 55 280 68 380 165 S580 270 735 100" stroke="#6fa2ea" stroke-width="15" opacity=".34"/>
+      <path d="M80 194 C180 105 275 112 365 174 S540 245 680 130" stroke="#f6dfa6" stroke-width="6" opacity=".19"/>
+      <path d="M455 55 C510 12 582 30 605 85 C625 135 580 184 520 184 C462 184 420 139 425 92" stroke="#7fb1f6" stroke-width="11" opacity=".25"/>
+    </svg>
+
+    <svg class="swirl s2" viewBox="0 0 810 300">
+      <path d="M20 170 C150 82 290 100 390 184 S625 270 795 120" stroke="#6d9fe6" stroke-width="15" opacity=".26"/>
+      <path d="M80 175 C190 114 292 125 380 185 S585 245 720 150" stroke="#f6dfa6" stroke-width="6" opacity=".16"/>
+    </svg>
+
+    <svg class="swirl s3" viewBox="0 0 790 300">
+      <path d="M20 205 C155 80 290 92 405 188 S625 278 758 112" stroke="#6798dd" stroke-width="15" opacity=".24"/>
+      <path d="M82 207 C195 112 310 119 400 188 S590 252 700 150" stroke="#f6dfa6" stroke-width="6" opacity=".14"/>
+    </svg>
+  </div>
+
+  <div class="shoot" style="top:14%;animation-delay:1.5s"></div>
+  <div class="shoot" style="top:42%;animation-delay:9s;animation-duration:9.5s"></div>
+  <div class="shoot" style="top:66%;animation-delay:16s;animation-duration:10s"></div>
+
+  <!-- SOBRE -->
+  <div id="intro">
+    <div class="intro-bg"></div>
+
+    <div class="intro-card">
+      <p class="intro-label">Tienes una invitación especial</p>
+
+      <div class="envelope-wrap" id="envelope">
+        <div class="env-back"></div>
+
+        <div class="env-letter">
+          <span class="n">Mariana</span>
+          <span class="s">Mis 15 años</span>
+        </div>
+
+        <div class="env-flap"></div>
+        <div class="env-left"></div>
+        <div class="env-right"></div>
+        <div class="env-bottom"></div>
+        <div class="env-seal">M</div>
+      </div>
+
+      <h1 class="intro-title">Una noche especial está por comenzar</h1>
+      <p class="intro-text">Abre la invitación y acompáñame bajo las estrellas</p>
+
+      <button class="btn" id="openInvitation" type="button">✦ Abrir invitación ✦</button>
+    </div>
+  </div>
+
+  <!-- AUDIO -->
+  <audio id="music" loop preload="auto">
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="music-button" id="musicButton" type="button" aria-label="Reproducir o pausar música">♪</button>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#fecha">Fecha</a>
+    <a href="#lugar">Lugar</a>
+    <a href="#vestimenta">Vestimenta</a>
+    <a href="#confirmar">Confirmar</a>
+  </nav>
+
+  <!-- PORTADA -->
+  <section class="hero" id="inicio">
+
+    <!-- Luna creciente estable, sin falsas fases tipo eclipse -->
+    <div class="moon-holder" aria-hidden="true">
+      <svg viewBox="0 0 120 120" role="img">
+        <defs>
+          <radialGradient id="moonFill" cx="30%" cy="25%">
+            <stop offset="0%" stop-color="#fffce9"/>
+            <stop offset="65%" stop-color="#f6d88f"/>
+            <stop offset="100%" stop-color="#d5a54d"/>
+          </radialGradient>
+          <mask id="crescentMask">
+            <rect width="120" height="120" fill="black"/>
+            <circle cx="60" cy="60" r="43" fill="white"/>
+            <circle cx="79" cy="44" r="42" fill="black"/>
+          </mask>
+        </defs>
+        <circle class="moon-glow-ring" cx="60" cy="60" r="55" fill="rgba(255,222,133,.16)"/>
+        <circle cx="60" cy="60" r="43" fill="url(#moonFill)" mask="url(#crescentMask)"/>
+        <circle cx="42" cy="75" r="5" fill="#bc934b" opacity=".24" mask="url(#crescentMask)"/>
+        <circle cx="57" cy="91" r="3" fill="#bc934b" opacity=".19" mask="url(#crescentMask)"/>
+      </svg>
+    </div>
+
+    <div class="hero-intro">
+      <p class="hero-invite">Mi familia tiene el honor de invitarte a celebrar mis XV años.</p>
+      <p class="hero-invite-sub">Con mucho cariño, te invito a compartir conmigo una noche mágica e inolvidable llena de sueños, estrellas y momentos especiales.</p>
+    </div>
+
+    <p class="hero-small">Te invito a celebrar mis quince años</p>
+
+    <h1 class="hero-name">
+      Mariana
+      <br>
+      Cabalceta Ruiz
+    </h1>
+
+    <div class="fifteen">
+      Mis <strong>15</strong> Años
+    </div>
+
+    <p class="theme">Noche Estrellada</p>
+    <p class="tagline">Una noche, mil estrellas</p>
+
+    <!-- Separador Hello Kitty -->
+    <div class="kitty-divider">
+      <div class="kitty-line left"></div>
+
+      <div class="kitty-icon">
+        <img src="kitty.png" alt="Hello Kitty decorativa" class="kitty-png">
+      </div>
+
+      <div class="kitty-line right"></div>
+    </div>
+  </section>
+
+  <!-- MENSAJE -->
+  <section class="message">
+    <div class="panel">
+      <h2 class="section-title">Una noche especial</h2>
+
+      <p>
+        Hay momentos que se guardan para siempre en el corazón.
+        <br><br>
+        En esta <em>noche estrellada</em>, quiero celebrar uno de los momentos más especiales de mi vida.
+        <br><br>
+        Me haría muy feliz contar con tu presencia y compartir juntos una noche inolvidable.
+      </p>
+    </div>
+  </section>
+
+  <!-- FECHA -->
+  <section class="date-section" id="fecha">
+    <div class="panel">
+      <h2 class="section-title">Fecha y hora</h2>
+
+      <div class="date-main">
+        Sábado
+        <br>
+        28 de noviembre de 2026
+      </div>
+
+      <p class="time">3:00 p. m.</p>
+
+      <div class="countdown">
+        <div class="count-item">
+          <span class="count-number" id="days">00</span>
+          <span class="count-label">Días</span>
+        </div>
+
+        <div class="count-item">
+          <span class="count-number" id="hours">00</span>
+          <span class="count-label">Horas</span>
+        </div>
+
+        <div class="count-item">
+          <span class="count-number" id="minutes">00</span>
+          <span class="count-label">Minutos</span>
+        </div>
+
+        <div class="count-item">
+          <span class="count-number" id="seconds">00</span>
+          <span class="count-label">Segundos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LUGAR -->
+  <section class="location" id="lugar">
+    <div class="panel">
+      <h2 class="section-title">Lugar</h2>
+
+      <div class="location-name">Salón El Cedro</div>
+
+      <p class="location-address">
+        <strong>San José, San Antonio de Coronado</strong>
+        <br>
+        Contiguo a la bomba Servicentro Don Pancho.
+      </p>
+
+      <div class="photos">
+        <div class="photo">
+          <div class="ph">Foto del rótulo</div>
+          <img src="salon2.jpg" alt="Rótulo de Salón El Cedro" onerror="this.style.display='none';this.previousElementSibling.style.display='flex'">
+        </div>
+        <div class="photo">
+          <div class="ph">Foto de la entrada</div>
+          <img src="salon3.jpg" alt="Fachada y entrada de Salón El Cedro" onerror="this.style.display='none';this.previousElementSibling.style.display='flex'">
+        </div>
+      </div>
+
+      <div class="map-button-wrap">
+        <a
+          class="btn"
+          href="https://maps.app.goo.gl/GKXkoXB9DNbMeYi39?g_st=ac"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ✦ Cómo llegar ✦
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VESTIMENTA -->
+  <section class="dress" id="vestimenta">
+    <div class="panel">
+      <h2 class="section-title">Código de vestimenta</h2>
+
+      <div class="dress-main">Elegante de noche</div>
+
+      <p class="dress-text">
+        Vestimenta formal de noche. Te pedimos por favor reservar el <strong>azul y todas sus tonalidades</strong> para la cumpleañera.
+        <br><br>
+        Te recomendamos traer un <strong>suéter</strong> para el frío y, si lo deseás, un par de <strong>zapatos cómodos</strong> para cambiarte y disfrutar de la celebración.
+      </p>
+
+      <div class="colors">
+        <div class="color-item">
+          <span class="dot navy"></span>
+          <span>Azul oscuro reservado para la quinceañera</span>
+        </div>
+
+        <div class="color-item">
+          <span class="dot silver"></span>
+          <span>Plateado reservado para las damas de honor</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGALO -->
+  <section class="gift">
+    <div class="panel">
+      <div class="gift-icon" aria-hidden="true">
+        <svg viewBox="0 0 80 80" width="46" height="46">
+          <rect x="14" y="31" width="52" height="33" rx="7" fill="#0E2A63" stroke="#D8AD59" stroke-width="2.5"/>
+          <rect x="12" y="23" width="56" height="14" rx="6" fill="#173B84" stroke="#D8AD59" stroke-width="2.5"/>
+          <rect x="37" y="23" width="6" height="41" rx="3" fill="#D8AD59"/>
+          <rect x="14" y="42" width="52" height="5" rx="2.5" fill="#D8AD59" opacity=".9"/>
+          <path d="M35 24 C28 23 25 15 31 12 C36 10 40 16 40 21" fill="none" stroke="#D8AD59" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M45 24 C52 23 55 15 49 12 C44 10 40 16 40 21" fill="none" stroke="#D8AD59" stroke-width="3.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h2 class="section-title">Lluvia de sobres</h2>
+
+      <p>
+        Tu presencia será el mejor regalo.
+        <br><br>
+        Si deseas tener un detalle conmigo, agradeceré con mucho cariño tu obsequio en efectivo.
+      </p>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="rsvp" id="confirmar">
+    <div class="panel">
+      <p class="rsvp-title">Espero compartir esta noche contigo</p>
+
+      <!-- Enlace de confirmación conectado a Google Forms. -->
+      <a class="btn rsvp-link" id="rsvpLink" href="https://docs.google.com/forms/d/e/1FAIpQLSc2UhbdKgVZOMBsP2G9ruaysLmJLsL386DAOLuoF8qkHpKEsg/viewform" target="_blank" rel="noopener noreferrer">
+        ✦ Confirmar asistencia ✦
+      </a>
+      <div class="rsvp-highlight">
+        <p class="rsvp-deadline">Es muy importante que todos los invitados confirmen su asistencia <strong>antes del 10 de noviembre</strong>, por temas de alimentación.</p>
+      </div>
+      <p class="rsvp-note" id="rsvpNote"></p>
+    </div>
+  </section>
+
+  <!-- TIERRA / VAN GOGH -->
+  <section class="earth-transition">
+    <p>Mariana · Mis 15 Años · 2026</p>
+  </section>
+
+  <script>
+    /* ESTRELLAS */
+    const sky = document.getElementById("sky");
+
+    for(let i=0;i<135;i++){
+      const s=document.createElement("span");
+      s.className="tiny-star";
+      const size=Math.random()*3+1;
+      s.style.width=size+"px";
+      s.style.height=size+"px";
+      s.style.left=Math.random()*100+"%";
+      s.style.top=Math.random()*100+"%";
+      s.style.setProperty("--t",(2+Math.random()*4)+"s");
+      s.style.setProperty("--d",(7+Math.random()*8)+"s");
+      sky.appendChild(s);
+    }
+
+    for(let i=0;i<12;i++){
+      const s=document.createElement("span");
+      s.className="big-star";
+      s.textContent=i%2===0?"✦":"✧";
+      s.style.left=Math.random()*100+"%";
+      s.style.top=Math.random()*75+"%";
+      s.style.fontSize=(22+Math.random()*16)+"px";
+      s.style.animationDelay=Math.random()*4+"s";
+      sky.appendChild(s);
+    }
+
+    /* CONTADOR */
+    const eventDate = new Date("2026-11-28T15:00:00-06:00").getTime();
+
+    function updateCountdown(){
+      const diff=eventDate-Date.now();
+
+      if(diff<=0){
+        ["days","hours","minutes","seconds"].forEach(id=>document.getElementById(id).textContent="00");
+        return;
+      }
+
+      const days=Math.floor(diff/(1000*60*60*24));
+      const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+      const minutes=Math.floor((diff%(1000*60*60))/(1000*60));
+      const seconds=Math.floor((diff%(1000*60))/1000);
+
+      document.getElementById("days").textContent=String(days).padStart(2,"0");
+      document.getElementById("hours").textContent=String(hours).padStart(2,"0");
+      document.getElementById("minutes").textContent=String(minutes).padStart(2,"0");
+      document.getElementById("seconds").textContent=String(seconds).padStart(2,"0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown,1000);
+
+    /* MUSICA */
+    const music=document.getElementById("music");
+    const musicButton=document.getElementById("musicButton");
+    let playing=false;
+
+    async function startMusic(){
+      try{
+        await music.play();
+        playing=true;
+        musicButton.textContent="❚❚";
+      }catch(e){
+        playing=false;
+        musicButton.textContent="♪";
+      }
+    }
+
+    musicButton.addEventListener("click",async()=>{
+      if(!playing){
+        await startMusic();
+      }else{
+        music.pause();
+        playing=false;
+        musicButton.textContent="♪";
+      }
+    });
+
+    /* ABRIR SOBRE */
+    const intro=document.getElementById("intro");
+    const envelope=document.getElementById("envelope");
+    const openInvitation=document.getElementById("openInvitation");
+
+    openInvitation.addEventListener("click",()=>{
+      envelope.classList.add("open");
+      startMusic();
+
+      setTimeout(()=>intro.classList.add("leaving"),1050);
+
+      setTimeout(()=>{
+        intro.remove();
+        window.scrollTo({top:0,behavior:"smooth"});
+      },1850);
+    });
+
+    /* RSVP: cambiar la constante por el enlace real cuando esté disponible. */
+    const googleFormsUrl = "https://docs.google.com/forms/d/e/1FAIpQLSc2UhbdKgVZOMBsP2G9ruaysLmJLsL386DAOLuoF8qkHpKEsg/viewform";
+    const rsvpLink=document.getElementById("rsvpLink");
+    const rsvpNote=document.getElementById("rsvpNote");
+    if(googleFormsUrl.trim()){
+      rsvpLink.href=googleFormsUrl;
+      rsvpLink.target="_blank";
+      rsvpLink.rel="noopener noreferrer";
+      rsvpLink.removeAttribute("aria-disabled");
+      rsvpNote.hidden=true;
+    } else {
+      rsvpLink.addEventListener("click",event=>event.preventDefault());
+    }
+
+    /* Si musica.mp3 todavía no existe, el botón se oculta para no fallar. */
+    music.addEventListener("error",()=>{musicButton.hidden=true});
+    const audioSource=music.querySelector("source");
+    if(!audioSource || !audioSource.getAttribute("src")) musicButton.hidden=true;
+  </script>
+
+</body>
+</html>
